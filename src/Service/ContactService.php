@@ -27,19 +27,24 @@ class ContactService
         $response = [
             'status' => 'error',
             'message' => 'Missing value(s)',
-            'data' => ''
+            'data' => null
         ];
 
         $contact = $this->serializer->deserialize($request->getContent(), Contact::class, 'json');
         $errors = $this->validator->validate($contact);
 
 
-        if ($errors->count() == 0) {
-            $response['status'] = 'success';
-            $response['message'] = 'New report was successfully added';
-            $response['data'] = $contact;
-            $this->entityManager->persist($contact);
-            $this->entityManager->flush();
+        if ($errors->count() === 0) {
+            try {
+                $this->entityManager->persist($contact);
+                $this->entityManager->flush();
+
+                $response['status'] = 'success';
+                $response['message'] = 'New report was successfully added';
+                $response['data'] = $contact;
+            } catch (\Exception $e) {
+                $response['message'] = 'Database error';
+            }
         }
 
         return new JsonResponse($response);

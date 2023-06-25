@@ -71,7 +71,7 @@ Encore
     .autoProvideVariables({
         $: 'jquery',
         jQuery: 'jquery',
-        'window.jQuery': 'jquery',
+        'window.jQuery': 'jquery'
     })
 ;
 

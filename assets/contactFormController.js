@@ -1,18 +1,15 @@
+import axios from "axios";
+
+import {Modal} from 'bootstrap';
+
 const nameInput = $('#name');
 const emailInput = $('#email');
 const messageInput = $('#message');
 
-import {Modal} from 'bootstrap';
-
 $('#submit').click(function () {
-
     const _name = nameInput.val().trim();
     const _email = emailInput.val().trim();
     const _message = messageInput.val().trim();
-
-    // if (!isEmail(_email)) {
-    //     ...
-    // }
 
     const response = {
         name: _name,
@@ -20,32 +17,26 @@ $('#submit').click(function () {
         message: _message
     }
 
-    $.ajax({
-        url: 'http://127.0.0.1:8000/contact/new',
-        type: 'POST',
-        data: JSON.stringify(response),
-        contentType: 'application/json',
-        success: function (response) {
-            const status = response.status;
+    axios.post('http://127.0.0.1:8000/contact/new', response).then(function (response) {
+        const data = response.data;
+        const status = data.status;
 
-            if (status === "success") {
-                const modal = new Modal('#success');
-                modal.show();
+        if (status === "success") {
+            showModal('#success');
 
-                nameInput.val('');
-                emailInput.val('');
-                messageInput.val('');
-            } else {
-                const modal = new Modal('#error');
-                modal.show();
-            }
-
+            nameInput.val('');
+            emailInput.val('');
+            messageInput.val('');
+        } else {
+            showModal('#error');
         }
+
+    }).catch(function (error) {
+        console.log('Contact post error: ', error);
     })
+})
 
-});
-
-function isEmail(email) {
-    const regex = /^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$/;
-    return regex.test(email);
+function showModal(modalId) {
+    const modal = new Modal(modalId);
+    modal.show()
 }

@@ -21,6 +21,7 @@ class Contact
 
     #[Assert\NotNull]
     #[Assert\NotBlank]
+    #[Assert\Email(message: 'Invalid email format!')]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
