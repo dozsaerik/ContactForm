@@ -29,7 +29,6 @@ npm install
 ```
 
 ## Futtatás
-A fő mappábol az alábbi parancsokkat kell le futtatni.
 
 Symfony server elindítása.
 ```bash
