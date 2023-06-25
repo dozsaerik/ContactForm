@@ -1,7 +1,42 @@
 @import "~bootstrap/scss/bootstrap";
 
+$bg-color: rgb(45, 45, 45);
+$card-bg-color: rgb(34, 34, 34);
+$input-bg-color: var(--bg-color);
+
+
 html, body {
   height: 100vh;
+}
+
+body {
+  background-color: #0093E9;
+  background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+}
+
+.card {
+  background: rgba(0, 224, 244, 0.7);
+}
+
+.form-control {
+  background-color: transparent;
+  border-inline: 0;
+  border-top: 0;
+  border-radius: 0;
+
+  &:focus {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+}
+
+label {
+  color: rgba(41, 41, 41, 0.9);
+
+  &::after {
+    background-color: transparent !important;
+  }
 }
 
 .btn-close {
