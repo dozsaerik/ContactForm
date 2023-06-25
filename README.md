@@ -19,7 +19,7 @@ nvm install v18.15.0
 Composer letöltése és telepítése:
 [Composer](https://getcomposer.org/download/)
 
-## Függöségek telepitése
+## Függőségek telepitése
 
 ```bash
 composer install
